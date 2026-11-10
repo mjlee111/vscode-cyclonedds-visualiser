@@ -1,0 +1,51 @@
+/* Shared styles for the cytoscape based views (node graph, TF tree). */
+.canvas-box {
+  position: relative;
+  min-height: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, var(--dot, rgba(128, 128, 128, 0.16)) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.seg button { background: transparent; color: var(--fg); border-radius: 0; padding: 3px 10px; border-right: 1px solid var(--border); }
+.seg button:last-child { border-right: none; }
+.seg button:hover { background: var(--hover); }
+.seg button.on { background: var(--btn-bg); color: var(--btn-fg); }
+.tb-btn { background: transparent; color: var(--fg); border: 1px solid transparent; padding: 3px 8px; border-radius: 4px; }
+.tb-btn:hover { background: var(--hover); }
+.tb-btn.open { border-color: var(--border); background: var(--hover); }
+.count-badge { display: inline-block; min-width: 16px; padding: 0 4px; margin-left: 4px; border-radius: 8px; font-size: 10px; line-height: 15px; text-align: center; background: var(--btn-bg); color: var(--btn-fg); }
+.popover {
+  position: absolute; z-index: 20; min-width: 260px; padding: 8px 4px; border-radius: 6px;
+  background: var(--vscode-editorWidget-background, #252526); border: 1px solid var(--vscode-editorWidget-border, #454545);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+.popover .pop-title { padding: 4px 10px 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.popover label { display: flex; align-items: flex-start; gap: 8px; padding: 4px 10px; border-radius: 4px; cursor: pointer; white-space: normal; }
+.popover label:hover { background: var(--hover); }
+.popover label small { display: block; color: var(--muted); font-size: 11px; }
+.chip {
+  position: absolute; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 4px 10px; border-radius: 6px; font-size: 11px;
+  background: color-mix(in srgb, var(--vscode-editorWidget-background, #252526) 88%, transparent);
+  border: 1px solid var(--border); color: var(--muted); backdrop-filter: blur(4px);
+}
+.chip b { color: var(--fg); font-weight: 600; }
+.legend-item { display: inline-flex; align-items: center; gap: 5px; }
+.lg-node { width: 18px; height: 10px; border-radius: 6px; border: 1.5px solid var(--lg-accent, #3794ff); background: var(--lg-node-fill, rgba(55, 148, 255, 0.2)); }
+.lg-topic { width: 18px; height: 10px; border-radius: 2px; border: 1px solid var(--lg-topic-border, #777); background: var(--lg-topic-fill, #2a2a2a); }
+.lg-topic.dashed { border-style: dashed; }
+.lg-dup { width: 18px; height: 10px; border-radius: 6px; border: 1.5px solid var(--lg-warn, #d18616); background: var(--lg-dup-fill, rgba(209, 134, 22, 0.2)); }
+.notice {
+  position: absolute; z-index: 6; left: 50%; transform: translateX(-50%); top: 14px; max-width: min(640px, 90%);
+  display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 6px;
+  background: var(--vscode-editorWidget-background, #252526); border: 1px solid var(--border); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.notice.center { top: 50%; transform: translate(-50%, -50%); flex-direction: column; text-align: center; padding: 18px 22px; }
+.side-panel { flex: 0 0 300px; border-left: 1px solid var(--border); padding: 10px 12px; background: var(--bg2); }
+.side-panel .kind { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.side-panel h3 { margin: 2px 0 6px; word-break: break-all; font-family: var(--mono); font-size: 13px; }
+.side-panel .warnbox { margin: 6px 0; padding: 6px 8px; border-radius: 4px; border-left: 3px solid var(--warn); background: var(--vscode-inputValidation-warningBackground, rgba(204, 167, 0, 0.12)); font-size: 12px; }
+.side-panel .item { font-family: var(--mono); font-size: 12px; padding: 2px 4px; border-radius: 3px; cursor: pointer; word-break: break-all; }
+.side-panel .item:hover { background: var(--hover); }
+.side-panel .item .t { color: var(--muted); font-size: 11px; }
+.lg-bad { width: 18px; height: 0; border-top: 2px dashed #f14c4c; }

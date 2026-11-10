@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#232833"/>
+      <stop offset="1" stop-color="#12151b"/>
+    </linearGradient>
+    <linearGradient id="bus" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1fb5a3"/>
+      <stop offset="1" stop-color="#3fd6c0"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d5a57"/>
+      <stop offset="1" stop-color="#143f3d"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="52" fill="url(#bg)"/>
+  <rect x="8.75" y="8.75" width="238.5" height="238.5" rx="51.25" fill="none" stroke="#3a4250" stroke-width="1.5"/>
+
+  <!-- participants attached to the data bus -->
+  <g stroke="#7fe3d4" stroke-width="5" stroke-linecap="round">
+    <path d="M70 84 V118"/>
+    <path d="M186 84 V118"/>
+    <path d="M100 138 V172"/>
+    <path d="M160 138 V172"/>
+  </g>
+  <rect x="34" y="48" width="72" height="36" rx="18" fill="url(#node)" stroke="#3fd6c0" stroke-width="4.5"/>
+  <rect x="150" y="48" width="72" height="36" rx="18" fill="url(#node)" stroke="#3fd6c0" stroke-width="4.5"/>
+  <rect x="64" y="172" width="72" height="36" rx="18" fill="url(#node)" stroke="#3fd6c0" stroke-width="4.5"/>
+  <rect x="146" y="172" width="58" height="36" rx="18" fill="#3a1f24" stroke="#f14c4c" stroke-width="4.5" stroke-dasharray="9 6"/>
+
+  <!-- data bus with a sample travelling on it -->
+  <rect x="26" y="116" width="204" height="24" rx="12" fill="url(#bus)"/>
+  <circle cx="128" cy="128" r="7" fill="#ffffff" opacity="0.9"/>
+  <circle cx="98" cy="128" r="4.5" fill="#ffffff" opacity="0.55"/>
+  <circle cx="74" cy="128" r="3" fill="#ffffff" opacity="0.3"/>
+</svg>

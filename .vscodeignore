@@ -1,0 +1,13 @@
+**
+!package.json
+!README.md
+!CHANGELOG.md
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!media/icon.png
+!media/dds.svg
+!media/dds-tab.svg
+!dist/extension.js
+!dist/webview/*.js
+!dist/webview/*.css
+!python/*.py

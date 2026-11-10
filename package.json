@@ -1,0 +1,238 @@
+{
+  "name": "cyclonedds-visualiser",
+  "displayName": "Cyclone DDS Visualiser",
+  "description": "Inspect Eclipse Cyclone DDS systems inside VS Code: participant/topic graph, QoS mismatch detection, topic monitor (Hz, bandwidth, QoS, live samples via XTypes) and plot.",
+  "icon": "media/icon.png",
+  "version": "0.1.0",
+  "publisher": "mjlee111",
+  "author": {
+    "name": "Myeongjin Lee",
+    "email": "menggu1234@naver.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjlee111/vscode-cyclonedds-visualiser.git"
+  },
+  "homepage": "https://github.com/mjlee111/vscode-cyclonedds-visualiser#readme",
+  "bugs": {
+    "url": "https://github.com/mjlee111/vscode-cyclonedds-visualiser/issues"
+  },
+  "private": true,
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "dds",
+    "cyclonedds",
+    "cyclone dds",
+    "xtypes",
+    "qos",
+    "middleware",
+    "robotics",
+    "ros2"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onWebviewPanel:ddsVis.graph",
+    "onWebviewPanel:ddsVis.topics",
+    "onWebviewPanel:ddsVis.plot"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ddsVis",
+          "title": "Cyclone DDS",
+          "icon": "media/dds.svg"
+        }
+      ]
+    },
+    "views": {
+      "ddsVis": [
+        {
+          "id": "ddsVis.tools",
+          "name": "Tools"
+        },
+        {
+          "id": "ddsVis.explorer",
+          "name": "DDS Explorer"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ddsVis.openGraph",
+        "title": "DDS Graph",
+        "category": "DDS",
+        "icon": "$(type-hierarchy)"
+      },
+      {
+        "command": "ddsVis.openTopics",
+        "title": "Topic Monitor",
+        "category": "DDS",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "ddsVis.openPlot",
+        "title": "Plot",
+        "category": "DDS",
+        "icon": "$(graph-line)"
+      },
+      {
+        "command": "ddsVis.showType",
+        "title": "Show Topic Type (IDL)",
+        "category": "DDS",
+        "icon": "$(symbol-structure)"
+      },
+      {
+        "command": "ddsVis.restartBackend",
+        "title": "Restart Backend",
+        "category": "DDS",
+        "icon": "$(debug-restart)"
+      },
+      {
+        "command": "ddsVis.showOutput",
+        "title": "Show Backend Log",
+        "category": "DDS",
+        "icon": "$(output)"
+      },
+      {
+        "command": "ddsVis.quickOpen",
+        "title": "Open Tool…",
+        "category": "DDS",
+        "icon": "$(radio-tower)"
+      },
+      {
+        "command": "ddsVis.copyName",
+        "title": "Copy Name",
+        "category": "DDS"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "ddsVis.openGraph",
+          "when": "view == ddsVis.explorer",
+          "group": "navigation@1"
+        },
+        {
+          "command": "ddsVis.openTopics",
+          "when": "view == ddsVis.explorer",
+          "group": "navigation@2"
+        },
+        {
+          "command": "ddsVis.restartBackend",
+          "when": "view == ddsVis.explorer || view == ddsVis.tools",
+          "group": "navigation@9"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "ddsVis.openTopics",
+          "when": "view == ddsVis.explorer && viewItem == topic",
+          "group": "inline@1"
+        },
+        {
+          "command": "ddsVis.openTopics",
+          "when": "view == ddsVis.explorer && viewItem == topic",
+          "group": "1_open@1"
+        },
+        {
+          "command": "ddsVis.openPlot",
+          "when": "view == ddsVis.explorer && viewItem == topic",
+          "group": "1_open@2"
+        },
+        {
+          "command": "ddsVis.showType",
+          "when": "view == ddsVis.explorer && viewItem == topic",
+          "group": "2_info@1"
+        },
+        {
+          "command": "ddsVis.copyName",
+          "when": "view == ddsVis.explorer && (viewItem == topic || viewItem == participant)",
+          "group": "3_copy@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "ddsVis.copyName",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Cyclone DDS Visualiser",
+      "properties": {
+        "ddsVis.pythonPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Python interpreter with the `cyclonedds` package (`pip install cyclonedds`), e.g. `~/.venvs/dds/bin/python`. Empty = `/usr/bin/python3` on Linux if present, else `python3`."
+        },
+        "ddsVis.domainId": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 232,
+          "description": "DDS domain to inspect."
+        },
+        "ddsVis.cycloneddsUri": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Cyclone DDS configuration for the backend (`CYCLONEDDS_URI`): a file path, `file://` URI or inline XML, e.g. to select the network interface. `${workspaceFolder}` is expanded. Empty = inherit the environment."
+        },
+        "ddsVis.graphPollInterval": {
+          "type": "number",
+          "default": 1.0,
+          "minimum": 0.2,
+          "description": "Seconds between discovery snapshots."
+        },
+        "ddsVis.typeLookupTimeout": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "description": "Seconds to wait for XTypes type information of a topic."
+        },
+        "ddsVis.reliableReaders": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Use reliable readers for topics whose writers are all reliable. Default (off): best-effort readers, which never apply back-pressure to writers but may miss samples under load and do not receive transient-local history."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p webview/tsconfig.json --noEmit",
+    "package": "node scripts/build.mjs --production && vsce package --no-dependencies",
+    "test": "node scripts/build.mjs && /usr/bin/python3 test/smoke_backend.py && node test/extension_host_test.js",
+    "test:ui": "node test/ui_e2e.mjs test-shots",
+    "harness": "node scripts/build.mjs && node dist/harness.js"
+  },
+  "devDependencies": {
+    "@types/cytoscape": "^3.21.9",
+    "@types/node": "^18.19.0",
+    "@types/vscode": "1.85.0",
+    "@types/ws": "^8.5.12",
+    "@vscode/vsce": "^2.32.0",
+    "cytoscape": "3.30.4",
+    "cytoscape-dagre": "2.5.0",
+    "esbuild": "0.24.0",
+    "playwright-core": "1.48.2",
+    "typescript": "5.6.3",
+    "ws": "8.18.0"
+  },
+  "overrides": {
+    "undici": "6.29.0",
+    "https-proxy-agent": "7.0.6",
+    "http-proxy-agent": "7.0.2"
+  }
+}

@@ -1,0 +1,52 @@
+# Publishes to the Visual Studio Marketplace when a GitHub release is published.
+# Auth: Marketplace Trusted Publishing (OIDC). Requires a policy on publisher
+# mjlee111 for repo mjlee111/vscode-cyclonedds-visualiser, workflow file publish.yml.
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: ${{ !github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # vsce >= 4 (needed for --oidc) requires Node 22.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check release tag matches package.json version
+        id: version
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
+            echo "::error::Release tag '$GITHUB_REF_NAME' does not match package.json version '$version'."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - run: npm run typecheck
+
+      - name: Check Python backend syntax
+        run: python3 -m py_compile python/dds_backend.py python/dds_demo.py
+
+      # npm test and test:ui are not run here: they need the cyclonedds Python package and a browser.
+      - run: npm run package
+
+      - name: Publish
+        run: npx --yes @vscode/vsce@4.1.0 publish --oidc --packagePath "cyclonedds-visualiser-${{ steps.version.outputs.version }}.vsix"
