@@ -2,7 +2,7 @@
 
 # Cyclone DDS Visualiser for Visual Studio Code
 
-Inspect Eclipse Cyclone DDS systems inside Visual Studio Code: who talks to whom, with which QoS, how fast, and what the data looks like.
+Inspect Cyclone DDS systems inside Visual Studio Code: participants, topics, QoS, rates and live data.
 
 ![VS Code](https://img.shields.io/badge/VS%20Code-%E2%89%A5%201.85-007ACC)
 ![Cyclone DDS](https://img.shields.io/badge/Cyclone%20DDS-Python%2011.x-1FB5A3)
@@ -282,7 +282,8 @@ The backend joins the network like any other Cyclone DDS application. To select 
       <Interfaces><NetworkInterface name="eth0"/></Interfaces>
     </General>
     <Discovery>
-      <Peers><Peer Address="192.168.123.161"/></Peers>
+      <!-- replace ROBOT_ADDRESS with the address of the machine to discover -->
+      <Peers><Peer Address="ROBOT_ADDRESS"/></Peers>
     </Discovery>
   </Domain>
 </CycloneDDS>

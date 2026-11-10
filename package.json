@@ -1,7 +1,7 @@
 {
   "name": "cyclonedds-visualiser",
   "displayName": "Cyclone DDS Visualiser",
-  "description": "Inspect Eclipse Cyclone DDS systems inside VS Code: participant/topic graph, QoS mismatch detection, topic monitor (Hz, bandwidth, QoS, live samples via XTypes) and plot.",
+  "description": "Inspect Cyclone DDS systems inside VS Code: participant/topic graph, QoS mismatch detection, topic monitor (Hz, bandwidth, QoS, live samples via XTypes) and plot.",
   "icon": "media/icon.png",
   "version": "0.1.0",
   "publisher": "mjlee111",
@@ -29,7 +29,6 @@
   "keywords": [
     "dds",
     "cyclonedds",
-    "cyclone dds",
     "xtypes",
     "qos",
     "middleware",

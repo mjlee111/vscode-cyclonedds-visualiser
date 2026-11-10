@@ -80,7 +80,6 @@ export interface BackendInfo {
   domainId: number;
   cyclonedds: string;
   guid: string;
-  hostname: string;
   pid: number;
   python: string;
   uri: string;

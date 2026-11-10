@@ -21,7 +21,6 @@ import json
 import math
 import os
 import queue
-import socket
 import struct
 import sys
 import threading
@@ -819,7 +818,7 @@ class Backend:
             ver = importlib.metadata.version('cyclonedds')
         except Exception:
             ver = '?'
-        return {'domainId': self.domain, 'cyclonedds': ver, 'guid': self.self_key, 'hostname': socket.gethostname(),
+        return {'domainId': self.domain, 'cyclonedds': ver, 'guid': self.self_key,
                 'pid': os.getpid(), 'python': sys.version.split()[0], 'uri': os.environ.get('CYCLONEDDS_URI', ''),
                 'reliableReaders': self.reliable_readers}
 
