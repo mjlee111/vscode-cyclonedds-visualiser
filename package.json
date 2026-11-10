@@ -190,7 +190,7 @@
         },
         "ddsVis.graphPollInterval": {
           "type": "number",
-          "default": 1.0,
+          "default": 1,
           "minimum": 0.2,
           "description": "Seconds between discovery snapshots."
         },
@@ -218,7 +218,7 @@
     "harness": "node scripts/build.mjs && node dist/harness.js"
   },
   "devDependencies": {
-    "@types/cytoscape": "^3.21.9",
+    "@types/cytoscape": "3.21.9",
     "@types/node": "^18.19.0",
     "@types/vscode": "1.85.0",
     "@types/ws": "^8.5.12",
